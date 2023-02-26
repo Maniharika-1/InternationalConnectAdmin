@@ -11,7 +11,7 @@ public class LoginUseCase {
         this.adminRepository = adminRepository;
     }
 
-    void execute(DatabaseReference adminNode, final GetDataListener getDataListener) {
+    public void execute(DatabaseReference adminNode, final GetDataListener getDataListener) {
         adminRepository.getAdminInfo(adminNode, getDataListener);
     }
 }
