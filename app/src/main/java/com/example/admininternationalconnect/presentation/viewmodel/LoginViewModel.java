@@ -17,4 +17,28 @@ public class LoginViewModel extends ViewModel {
         this.loginUseCase = loginUseCase;
         adminNode = FirebaseDatabase.getInstance().getReference().child("admin");
     }
+
+    public void login(String userName, String password) {
+        loginUseCase.execute(adminNode, new GetDataListener() {
+            @Override
+            public void onSuccess(Admin admin) {
+                if (admin != null && admin.getUserName() != null && admin.getUserName().contentEquals(userName)
+                        && admin.getPassword() != null && admin.getPassword().contentEquals(password)) {
+                    //call intent
+                } else {
+
+                }
+            }
+
+            @Override
+            public void onStart() {
+
+            }
+
+            @Override
+            public void onFailure() {
+
+            }
+        });
+    }
 }
