@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">AdminInternationalConnect</string>
+    <string name="name_admin">User Name</string>
+    <string name="password_admin">Password</string>
+    <string name="login_error_admin">User name or password is incorrect!</string>
+    <string name="login_admin">Login</string>
 </resources>
