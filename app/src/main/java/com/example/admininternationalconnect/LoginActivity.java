@@ -28,7 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         activityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
         setContentView(activityLoginBinding.getRoot());
 
-        loginViewModelFactory = new LoginViewModelFactory(new LoginUseCase(new AdminRepositoryImpl(new AdminDataSourceImpl())));
+        loginViewModelFactory = new LoginViewModelFactory(getApplication(), new LoginUseCase(new AdminRepositoryImpl(new AdminDataSourceImpl())));
 
         loginViewModel = new ViewModelProvider(this, loginViewModelFactory).get(LoginViewModel.class);
 
