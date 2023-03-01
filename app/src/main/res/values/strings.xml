@@ -4,4 +4,6 @@
     <string name="password_admin">Password</string>
     <string name="login_error_admin">User name or password is incorrect!</string>
     <string name="login_admin">Login</string>
+    <string name="shared_preferences_name">com.example.admininternationalconnect.adminsp</string>
+    <string name="no_applicants_currently_home">No applicants currently!</string>
 </resources>
