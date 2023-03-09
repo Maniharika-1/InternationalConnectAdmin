@@ -1,45 +1,53 @@
 package com.example.admininternationalconnect.presentation.viewmodel;
 
+import android.app.Application;
+
+import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
-import androidx.lifecycle.ViewModel;
 
 import com.example.admininternationalconnect.data.model.Admin;
 import com.example.admininternationalconnect.domain.usecase.LoginUseCase;
-import com.example.admininternationalconnect.domain.util.GetDataListener;
+import com.example.admininternationalconnect.domain.util.OnDataFetchedListener;
+import com.example.admininternationalconnect.presentation.util.SharedPreferencesUtil;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-public class LoginViewModel extends ViewModel {
+public class LoginViewModel extends AndroidViewModel {
 
-    LoginUseCase loginUseCase;
-    DatabaseReference adminNode;
-    public MutableLiveData<String> errorMessage;
-    Boolean loginSuccessful;
+    LoginUseCase mLoginUseCase;
+    DatabaseReference mAdminNode;
+    public MutableLiveData<String> mErrorMessage;
+    public MutableLiveData<Boolean> mLoginSuccessful;
+    SharedPreferencesUtil mSharedPreferencesUtil;
     final String TAG = "LoginViewModel";
-    
-    public LoginViewModel(LoginUseCase loginUseCase) {
-        this.loginUseCase = loginUseCase;
-        adminNode = FirebaseDatabase.getInstance().getReference().child("admin");
-        errorMessage = new MutableLiveData<>();
-        errorMessage.setValue(null);
-        loginSuccessful = true;
+
+    public LoginViewModel(Application application, LoginUseCase loginUseCase) {
+        super(application);
+
+        mLoginUseCase = loginUseCase;
+        mAdminNode = FirebaseDatabase.getInstance().getReference().child("admin");
+        mErrorMessage = new MutableLiveData<>();
+        mLoginSuccessful = new MutableLiveData<>();
+        mErrorMessage.setValue(null);
+        //loginSuccessful.setValue(false);
+        mSharedPreferencesUtil = new SharedPreferencesUtil();
     }
 
     public void login(String userName, String password) {
-
-        loginUseCase.execute(adminNode, new GetDataListener() {
+        mLoginUseCase.execute(mAdminNode, new OnDataFetchedListener() {
             @Override
             public void onSuccess(Admin admin) {
+                if (admin != null && admin.getmUserName() != null && admin.getmUserName().contentEquals(userName)
+                        && admin.getmPassword() != null && admin.getmPassword().contentEquals(password)) {
 
-                if (admin != null && admin.getUserName() != null && admin.getUserName().contentEquals(userName)
-                        && admin.getPassword() != null && admin.getPassword().contentEquals(password)) {
-                    //call intent
-                    loginSuccessful = true;
-                    errorMessage.setValue(null);
+                    mLoginSuccessful.setValue(true);
+                    mErrorMessage.setValue(null);
 
                 } else {
-                    loginSuccessful = false;
-                    errorMessage.setValue("User name or password is incorrect!");
+
+                    mLoginSuccessful.setValue(false);
+                    mErrorMessage.setValue("User name or password is incorrect!");
+
                 }
             }
 
@@ -49,9 +57,10 @@ public class LoginViewModel extends ViewModel {
 
             @Override
             public void onFailure() {
-                loginSuccessful = false;
-                errorMessage.setValue("User name or password is incorrect!");
+                mLoginSuccessful.setValue(false);
+                mErrorMessage.setValue("User name or password is incorrect!");
             }
         });
     }
+
 }

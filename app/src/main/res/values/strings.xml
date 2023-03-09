@@ -1,7 +1,10 @@
 <resources>
-    <string name="app_name">AdminInternationalConnect</string>
-    <string name="name_admin">User Name</string>
+    <string name="app_name">Islander Admin</string>
+    <string name="name_admin">Username</string>
     <string name="password_admin">Password</string>
     <string name="login_error_admin">User name or password is incorrect!</string>
     <string name="login_admin">Login</string>
+    <string name="shared_preferences_name">com.example.admininternationalconnect.adminsp</string>
+    <string name="no_applicants_currently_home">No applicants currently!</string>
+    <string name="islander_admin_login">ADMIN LOGIN</string>
 </resources>

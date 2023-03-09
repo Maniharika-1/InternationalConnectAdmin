@@ -2,30 +2,30 @@ package com.example.admininternationalconnect.data.model;
 
 public class Admin {
 
-    String userName;
-    String password;
+    String mUserName;
+    String mPassword;
 
     public Admin(String userName, String password) {
-        this.userName = userName;
-        this.password = password;
+        mUserName = userName;
+        mPassword = password;
     }
 
     public Admin() {
     }
 
-    public String getUserName() {
-        return userName;
+    public String getmUserName() {
+        return mUserName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setmUserName(String mUserName) {
+        this.mUserName = mUserName;
     }
 
-    public String getPassword() {
-        return password;
+    public String getmPassword() {
+        return mPassword;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setmPassword(String mPassword) {
+        this.mPassword = mPassword;
     }
 }

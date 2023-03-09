@@ -1,19 +1,19 @@
 package com.example.admininternationalconnect.domain.repository;
 
 import com.example.admininternationalconnect.data.repository.datasource.AdminDataSource;
-import com.example.admininternationalconnect.data.repository.datasourceImpl.AdminDataSourceImpl;
-import com.example.admininternationalconnect.domain.util.GetDataListener;
+import com.example.admininternationalconnect.domain.util.OnDataFetchedListener;
 import com.google.firebase.database.DatabaseReference;
 
 public class AdminRepositoryImpl implements AdminRepository{
 
-    AdminDataSource adminDataSource;
+    AdminDataSource mAdminDataSource;
+
     public AdminRepositoryImpl(AdminDataSource adminDataSource) {
-        this.adminDataSource = adminDataSource;
+        mAdminDataSource = adminDataSource;
     }
 
     @Override
-    public void getAdminInfo(DatabaseReference adminNode, final GetDataListener getDataListener) {
-        adminDataSource.getAdminInfo(adminNode, getDataListener);
+    public void getAdminInfo(DatabaseReference adminNode, final OnDataFetchedListener onDataFetchedListener) {
+        mAdminDataSource.getAdminInfo(adminNode, onDataFetchedListener);
     }
 }
