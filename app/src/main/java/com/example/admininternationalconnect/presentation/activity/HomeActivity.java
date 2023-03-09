@@ -1,8 +1,10 @@
-package com.example.admininternationalconnect;
+package com.example.admininternationalconnect.presentation.activity;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+
+import com.example.admininternationalconnect.R;
 
 public class HomeActivity extends AppCompatActivity {
 
