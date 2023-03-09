@@ -1,4 +1,4 @@
-package com.example.admininternationalconnect.presentation.viewmodel;
+package com.example.admininternationalconnect.presentation.viewmodelfactory;
 
 import android.app.Application;
 
@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.admininternationalconnect.domain.usecase.LoginUseCase;
+import com.example.admininternationalconnect.presentation.viewmodel.LoginViewModel;
 
 public class LoginViewModelFactory implements ViewModelProvider.Factory {
 
