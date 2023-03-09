@@ -9,4 +9,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="red">#ED2C2C</color>
     <color name="login_blue">#00B0FF</color>
+    <color name="login_bg">#235868</color>
+    <color name="login_btn_bg">#3FE6CD</color>
 </resources>
