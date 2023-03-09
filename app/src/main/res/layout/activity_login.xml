@@ -78,7 +78,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="10dp"
-            android:text="@{loginViewModel.errorMessage}"
+            android:text="@{loginViewModel.mErrorMessage}"
             android:textColor="@color/red"
             android:textSize="14sp"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -9,7 +9,7 @@ public class SharedPreferencesUtil {
     SharedPreferences mSharedPreferences;
 
     public SharedPreferencesUtil() {
-        mSharedPreferences = AdminBaseClass.sharedPreferences;
+        mSharedPreferences = AdminBaseClass.mSharedPreferences;
     }
 
     public void putBoolean(String key, Boolean value) {

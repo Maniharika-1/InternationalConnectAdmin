@@ -11,12 +11,12 @@ import com.example.admininternationalconnect.presentation.viewmodel.LoginViewMod
 
 public class LoginViewModelFactory implements ViewModelProvider.Factory {
 
-    private LoginUseCase loginUseCase;
-    private Application application;
+    private LoginUseCase mLoginUseCase;
+    private Application mApplication;
 
     public LoginViewModelFactory(Application application, LoginUseCase loginUseCase) {
-        this.application = application;
-        this.loginUseCase = loginUseCase;
+        mApplication = application;
+        mLoginUseCase = loginUseCase;
     }
 
     @NonNull
@@ -24,7 +24,7 @@ public class LoginViewModelFactory implements ViewModelProvider.Factory {
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
         if (modelClass.isAssignableFrom(LoginViewModel.class))
-            return (T) new LoginViewModel(application, loginUseCase);
+            return (T) new LoginViewModel(mApplication, mLoginUseCase);
 
         return ViewModelProvider.Factory.super.create(modelClass);
     }

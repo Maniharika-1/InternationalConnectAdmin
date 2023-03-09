@@ -20,12 +20,12 @@ import com.example.admininternationalconnect.presentation.viewmodelfactory.Login
 
 public class LoginActivity extends AppCompatActivity {
 
-    ActivityLoginBinding activityLoginBinding;
-    LoginViewModel loginViewModel;
-    LoginViewModelFactory loginViewModelFactory;
+    ActivityLoginBinding mActivityLoginBinding;
+    LoginViewModel mLoginViewModel;
+    LoginViewModelFactory mLoginViewModelFactory;
     final String LOGGED_IN_KEY = "LoggedIn";
     final String TAG = "LoginActivity";
-    private SharedPreferencesUtil sharedPreferencesUtil;
+    private SharedPreferencesUtil mSharedPreferencesUtil;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         SplashScreen splashScreen = SplashScreen.installSplashScreen(this);
 
-        sharedPreferencesUtil = new SharedPreferencesUtil();
+        mSharedPreferencesUtil = new SharedPreferencesUtil();
         final Boolean[] loggedIn = {false};
 
         final View content = findViewById(android.R.id.content);
@@ -42,7 +42,7 @@ public class LoginActivity extends AppCompatActivity {
                     @Override
                     public boolean onPreDraw() {
 
-                        loggedIn[0] = sharedPreferencesUtil.getBoolean(LOGGED_IN_KEY, false);
+                        loggedIn[0] = mSharedPreferencesUtil.getBoolean(LOGGED_IN_KEY, false);
 
                         Log.d(TAG, "onPreDraw: " + loggedIn[0]);
                         if (loggedIn[0]) {
@@ -51,13 +51,13 @@ public class LoginActivity extends AppCompatActivity {
 
                         } else {
 
-                            activityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
-                            setContentView(activityLoginBinding.getRoot());
+                            mActivityLoginBinding = ActivityLoginBinding.inflate(getLayoutInflater());
+                            setContentView(mActivityLoginBinding.getRoot());
 
                             initLoginViewModelAndViewModelFactory();
 
-                            activityLoginBinding.setLoginViewModel(loginViewModel);
-                            activityLoginBinding.setLifecycleOwner(LoginActivity.this);
+                            mActivityLoginBinding.setLoginViewModel(mLoginViewModel);
+                            mActivityLoginBinding.setLifecycleOwner(LoginActivity.this);
 
                             initClickListeners();
 
@@ -73,16 +73,16 @@ public class LoginActivity extends AppCompatActivity {
 
     private void setLoginSuccessfulLiveDataObserver() {
 
-        loginViewModel.loginSuccessful.observe(LoginActivity.this, loginSuccessful -> {
+        mLoginViewModel.mLoginSuccessful.observe(LoginActivity.this, loginSuccessful -> {
 
             if (loginSuccessful) {
 
-                sharedPreferencesUtil.putBoolean(LOGGED_IN_KEY, true);
+                mSharedPreferencesUtil.putBoolean(LOGGED_IN_KEY, true);
                 callHomeActivity();
 
             } else {
 
-                sharedPreferencesUtil.putBoolean(LOGGED_IN_KEY, false);
+                mSharedPreferencesUtil.putBoolean(LOGGED_IN_KEY, false);
 
             }
 
@@ -92,11 +92,11 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initClickListeners() {
 
-        activityLoginBinding.loginBtn.setOnClickListener(view -> {
+        mActivityLoginBinding.loginBtn.setOnClickListener(view -> {
 
-            loginViewModel.login(
-                    activityLoginBinding.userNameET.getText().toString(),
-                    activityLoginBinding.passwordET.getText().toString()
+            mLoginViewModel.login(
+                    mActivityLoginBinding.userNameET.getText().toString(),
+                    mActivityLoginBinding.passwordET.getText().toString()
             );
 
         });
@@ -105,9 +105,9 @@ public class LoginActivity extends AppCompatActivity {
 
     private void initLoginViewModelAndViewModelFactory() {
 
-        loginViewModelFactory = new LoginViewModelFactory(getApplication(), new LoginUseCase(new AdminRepositoryImpl(new AdminDataSourceImpl())));
+        mLoginViewModelFactory = new LoginViewModelFactory(getApplication(), new LoginUseCase(new AdminRepositoryImpl(new AdminDataSourceImpl())));
 
-        loginViewModel = new ViewModelProvider(LoginActivity.this, loginViewModelFactory).get(LoginViewModel.class);
+        mLoginViewModel = new ViewModelProvider(LoginActivity.this, mLoginViewModelFactory).get(LoginViewModel.class);
 
     }
 
